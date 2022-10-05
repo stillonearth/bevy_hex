@@ -9,6 +9,8 @@ mod hex;
 
 fn main() {
     App::new()
+        .insert_resource(Msaa { samples: 4 })
+        .insert_resource(ClearColor(Color::WHITE))
         .add_plugins(DefaultPlugins)
         .add_startup_system(sample_level)
         .add_system(keyboard_controls)
@@ -29,16 +31,20 @@ fn sample_level(
             ..Default::default()
         });
 
-    commands
-        // light
-        .spawn_bundle(PointLightBundle {
-            transform: Transform::from_translation(Vec3::new(4.0, 8.0, 4.0)),
-            point_light: PointLight {
-                intensity: 5000.0,
-                ..default()
-            },
-            ..Default::default()
-        });
+    // directional 'sun' light
+    commands.spawn_bundle(DirectionalLightBundle {
+        directional_light: DirectionalLight {
+            shadows_enabled: false,
+            illuminance: 12000.0,
+            ..default()
+        },
+        transform: Transform {
+            translation: Vec3::new(0.0, 20.0, 0.0),
+            rotation: Quat::from_rotation_x(-std::f32::consts::FRAC_PI_4),
+            ..default()
+        },
+        ..default()
+    });
 
     let colors = [
         Color::rgb(0.286, 0.725, 0.902), // Water #49B9E6 (73, 185, 230)
