@@ -8,6 +8,5 @@ edition = "2021"
 rand = "0.8.5"
 bevy = { version = "0.8.1" }
 
-
 [profile.dev]
 opt-level = 3
