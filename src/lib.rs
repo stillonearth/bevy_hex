@@ -10,7 +10,7 @@ pub mod hex;
 pub fn generate_hex_mesh() -> Mesh {
     let mut pts: Vec<[f32; 3]> = vec![];
     let c = hex::HexCoord::new(0, 0);
-    geometry::bevel_hexagon_points(&mut pts, 1.0, 0.95, &c);
+    geometry::bevel_hexagon_points(&mut pts, 1.0, 1.0, &c);
 
     let mut normals: Vec<[f32; 3]> = vec![];
     geometry::bevel_hexagon_normals(&mut normals);
