@@ -175,17 +175,17 @@ pub fn quad_indices(
 }
 
 /// Fill `idx` with indices to construct a beveled hexagon
-pub fn bevel_hexagon_indices(idx: &mut Vec<u32>) {
+pub fn bevel_hexagon_indices(idx: &mut Vec<u32>, hex_num: u32) {
     // First, fill indices with the flat top hexagon
     flat_hexagon_indices(idx);
 
     // Add slopes
-    for i in 0..=6 {
+    for i in 6 * hex_num..=(6 * hex_num + 6) {
         // Insert a quad, using the inner beveled hex, and the outer sloped hex
         quad_indices(idx, i + 1, i + 2, i + 8, i + 9);
     }
     // Add a skirt
-    for i in 0..=6 {
+    for i in 6 * hex_num..=(6 * hex_num + 6) {
         // Insert a quad using the outer sloped hex and the bottom base hex
         quad_indices(idx, i + 8, i + 9, i + 15, i + 16);
     }

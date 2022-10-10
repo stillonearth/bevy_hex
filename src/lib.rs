@@ -21,7 +21,7 @@ pub fn generate_hex_mesh() -> Mesh {
     }
 
     let mut indices = vec![];
-    geometry::bevel_hexagon_indices(&mut indices);
+    geometry::bevel_hexagon_indices(&mut indices, 0);
 
     let mut mesh = Mesh::new(PrimitiveTopology::TriangleList);
     mesh.set_indices(Some(Indices::U32(indices)));
