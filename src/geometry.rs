@@ -106,12 +106,13 @@ pub fn flat_hexagon_points(pts: &mut Vec<[f32; 3]>, radius: f32, c: &HexCoord) {
     // We'll create 6 triangles, all sharing a center point
     pts.push(center(radius, c, &[0., 0., 0.]));
     flat_hexagon_ring(pts, radius, c, &[0., 0., 0.]);
+    pts.push(center(radius, c, &[0., 0., 0.]));
 }
 
 /// Fill `normals` with the normals for a flat hexagon
 pub fn flat_hexagon_normals(normals: &mut Vec<[f32; 3]>) {
     // Each of the 8 points (center + corners + repeat) just points up
-    for _ in 0..8 {
+    for _ in 0..9 {
         normals.push([0., 1., 0.]);
     }
 }
@@ -138,12 +139,12 @@ pub fn bevel_hexagon_points(points: &mut Vec<[f32; 3]>, radius: f32, factor: f32
     let offset = [0., inner_radius - radius, 0.];
 
     // Add small slopes
-    flat_hexagon_ring(points, radius, c, &offset);
+    // flat_hexagon_ring(points, radius, c, &offset);
 
     // Now, add points much lower, so we can create skirts so if hexagons are offset we don't see gaps
     let offset = [0., -1.5, 0.];
     // Add skirts
-    flat_hexagon_ring(points, radius, c, &offset);
+    // flat_hexagon_ring(points, radius, c, &offset);
 }
 
 /// Fill `normals` with the normals for the a beveled hexagon
